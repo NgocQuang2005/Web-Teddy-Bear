@@ -47,7 +47,7 @@ const EditPersonal = () => {
                 storedUser.id,
                 values.fullName,
                 values.email,
-                "", // không đổi mật khẩu tại đây
+                "",
                 values.phoneNumber,
                 values.address,
                 userInfo.roleId

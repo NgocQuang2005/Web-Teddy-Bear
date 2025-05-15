@@ -7,7 +7,7 @@ const Contact = () => {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
-        const user = JSON.parse(localStorage.getItem("token")); // 👈 lấy thông tin từ localStorage
+        const user = JSON.parse(localStorage.getItem("token"));
 
         const contactData = {
             fullName: user?.fullName,

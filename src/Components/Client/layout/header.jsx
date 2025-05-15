@@ -44,7 +44,7 @@ function Header() {
     useEffect(() => {
         const fetchCartCount = async () => {
             try {
-                const user = JSON.parse(localStorage.getItem("token")); // Sửa lại đúng key lưu user
+                const user = JSON.parse(localStorage.getItem("token"));
                 if (!user || !user.id) return;
                 const res = await getAllCartItems();
                 // Lọc các cart item thuộc về user
@@ -66,6 +66,7 @@ function Header() {
         };
 
     }, []);
+    //tìm kiếm gấu bông
     const handleSearch = (e) => {
         e.preventDefault();
         if (searchText.trim()) {
