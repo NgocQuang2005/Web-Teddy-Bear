@@ -16,6 +16,13 @@ import Products from './Components/Admin/pages/Products.jsx'
 import Category from './Components/Admin/pages/Category.jsx'
 import CartItem from './Components/Admin/pages/CartItem.jsx'
 import Order from './Components/Admin/pages/Order.jsx'
+import Product from './Components/Client/pages/Product.jsx'
+import Contact from './Components/Client/pages/Contact.jsx'
+import Blindbox from './Components/Client/pages/Blindbox.jsx'
+import EditPersonal from './Components/Client/pages/EditPersonal.jsx'
+import Orders from './Components/Client/pages/Orders.jsx'
+import CartItemClient from './Components/Client/pages/CartItem.jsx'
+import ProductDetails from './Components/Client/pages/ProductDetails.jsx'
 const router = createBrowserRouter([
   {
     path: '/client',
@@ -25,6 +32,35 @@ const router = createBrowserRouter([
         path: 'home',
         element: <Home />
       },
+      {
+        path: 'products',
+        element: <Product />
+      },
+      {
+        path: 'blindbox',
+        element: <Blindbox />
+      },
+      {
+        path: 'editpersonal',
+        element: <EditPersonal />
+      },
+      {
+        path: 'orders',
+        element: <Orders />
+      },
+      {
+        path: 'cartitems',
+        element: <CartItemClient />
+      },
+      {
+        path: 'contact',
+        element: <Contact />
+      },
+
+      {
+        path: 'product/:id',
+        element: <ProductDetails />
+      }
       // có thể thêm các route client khác ở đây
     ]
   },

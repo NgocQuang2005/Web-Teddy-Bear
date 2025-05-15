@@ -4,7 +4,8 @@ import MenuAdmin from '../layout/Menu'
 function Dashboard() {
     return (
         < >
-            vãi pịa
+            chả nghĩ ra cái gì để làm trang này:)
+
         </>
     )
 }

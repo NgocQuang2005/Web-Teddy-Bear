@@ -84,7 +84,7 @@ const MenuAdmin = ({ collapsed, toggleCollapsed }) => {
                 defaultOpenKeys={current.openKey ? [current.openKey] : []}
                 items={items}
                 onClick={(e) => {
-                    if (e.key === '9') {
+                    if (e.key === '8') {
                         handleLogout();
                     }
                 }}

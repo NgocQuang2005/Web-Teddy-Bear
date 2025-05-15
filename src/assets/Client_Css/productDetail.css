@@ -1,0 +1,8 @@
+.product-detail-container {
+    margin: 0 auto;
+}
+
+.product-detail-img {
+    object-fit: cover;
+    max-height: 400px;
+}

@@ -1,0 +1,245 @@
+/* content */
+
+.introduce {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.introduce-content {
+  flex: 1;
+}
+.introduce-content h1 {
+  font-size: 62px;
+  line-height: 62px;
+  font-weight: bold;
+  width: 90%;
+  color: black;
+  margin-bottom: 32px;
+}
+.introduce-content__text {
+  font-size: 16px;
+  font-weight: 600;
+  width: 90%;
+  color: #aaa;
+  margin-bottom: 32px;
+}
+.shop-now {
+  padding: 13px 35px;
+  background-color: black;
+  color: white;
+  display: inline-block;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  transition: transform 0.25s linear;
+  margin-bottom: 48px;
+}
+.shop-now:hover {
+  transform: scale(1.1);
+}
+.statistical {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(162px, 1fr));
+  grid-gap: 32px;
+}
+.statistical-item {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+.statistical-item__quantity {
+  font-size: 40px;
+  font-weight: bold;
+}
+.statistical-item__text {
+  font-size: 16px;
+  color: #b4acac;
+}
+.introduce-background {
+  flex: 1;
+}
+.introduce-background img {
+  width: 100%;
+}
+/* cooperate */
+.cooperate {
+  width: 100%;
+  height: 122px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -6px;
+}
+.cooperate-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 105px;
+  row-gap: 20px;
+  flex-wrap: wrap;
+}
+/* product */
+.products {
+  margin-top: 72px;
+}
+.products-title {
+  text-align: center;
+  font-size: 58px;
+  font-weight: bold;
+  margin-bottom: 55px;
+}
+.product {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-gap: 20px;
+}
+.product__item {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+.product__item-img {
+  width: 100%;
+  object-fit: cover;
+}
+.product__item-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.product__item-price {
+  font-size: 23px;
+}
+.product__item-price del {
+  margin-left: 8px;
+  color: #ccc;
+  font-size: 20px;
+}
+.view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-all {
+  margin-top: 36px;
+  padding: 13px 35px;
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  border-radius: 20px;
+  transition: transform 0.25s linear;
+}
+.view-all:hover {
+  transform: scale(1.1);
+}
+/* OUR HAPPY CUSTOMERS */
+.happy-dm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.happy__dm-title {
+  font-size: 48px;
+  font-weight: bold;
+}
+.slider-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#prev,
+#next {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+#prev ion-icon,
+#next ion-icon {
+  font-size: 22px;
+  color: black;
+}
+.happy_comment {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 20px;
+}
+.happy_comment-item {
+  padding: 28px 32px;
+}
+.star {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+  color: yellow;
+}
+.name {
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.name ion-icon {
+  font-size: 20px;
+  color: chartreuse;
+}
+.description {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #919191;
+}
+
+
+
+/* css web */
+.slider{
+  height: 440px;
+  color: #fff;
+  line-height: 440px;
+  text-align: center;
+  background: #364d79;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.site-content{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+}
+.content_arrus{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.img-icon{
+  max-height: 1.75rem;
+    margin-right: 0.5rem;
+}
+@media screen and (max-width: 1082px) {
+  .site-content{
+    display: none;
+  }
+}
+@media screen and (max-width: 959.98px) {
+  .slider{
+    height: 320px;
+  }
+}
+@media screen and (max-width: 529.98px) {
+  .slider{
+    height: 250px;
+  }
+}
