@@ -1,36 +1,62 @@
-import { DeleteOutlined, EditFilled } from '@ant-design/icons';
-import { Button, Popconfirm, Space, Table } from 'antd';
-import React, { useState } from 'react'
-import { deleteCombinedOrders } from '../../../services/order.services';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Button, Popconfirm, Select, Space, Table, Tooltip } from 'antd';
+import React, { useState } from 'react';
+import { deleteCombinedOrders, updateCombinedOrders } from '../../../services/order.services';
 import GetDetailOrder from './getdetail.order';
 
-const OrderTable = (props) => {
-    const { dataOrder, loadOrder, api } = props
-    const [isModalUpdate, setIsModalUpdate] = useState(false);
-    const [dataUpdate, setDataUpdate] = useState(null);
-    const [dataDetail, setDataDetail] = useState(null)
-    const [isDetailOpen, setIsDetailOpen] = useState(false)
-    const flattenDataOrder = dataOrder.flatMap(order =>
-        order.orderDetails.map(detail => ({
-            ...detail,
-            orderId: order.id,
-            userName: order.userName,
-            status: order.status,
-            totalAmount: order.totalAmount,
-            orderDate: order.orderDate
-        }))
-    );
+const OrderTable = ({ dataOrder, loadOrder, api }) => {
+    const [dataDetail, setDataDetail] = useState(null);
+    const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+    const statusOptions = [
+        "Đang chờ xác nhận",
+        "Đã xác nhận",
+        "Đã đi đơn",
+        "Đã nhận được hàng"
+    ];
+
+    const handleStatusChange = async (value, record) => {
+        const res = await updateCombinedOrders(record.id, record.userId, value, record.orderDetails);
+        if (res.data) {
+            api["success"]({
+                message: 'Cập nhật trạng thái',
+                description: 'Trạng thái đơn hàng đã được cập nhật',
+            });
+            await loadOrder();
+        } else {
+            api["error"]({
+                message: 'Lỗi',
+                description: 'Cập nhật trạng thái thất bại',
+            });
+        }
+    };
+
+    const handleDeleteOrder = async (id) => {
+        const res = await deleteCombinedOrders(id);
+        if (res.data) {
+            api["success"]({
+                message: 'Delete order',
+                description: 'Xóa order thành công',
+            });
+            await loadOrder();
+        } else {
+            api["error"]({
+                message: "Error delete order",
+                description: JSON.stringify(res.message)
+            });
+        }
+    };
 
     const columns = [
         {
             title: 'Mã đơn hàng',
-            dataIndex: 'orderId',
-            key: 'orderId',
+            dataIndex: 'id',
+            key: 'id',
             render: (text, record) => (
-                <a href="#" onClick={() => {
+                <a onClick={() => {
                     setDataDetail(record);
                     setIsDetailOpen(true);
-                }}>{record.orderId}</a>
+                }}>{record.id}</a>
             )
         },
         {
@@ -39,19 +65,9 @@ const OrderTable = (props) => {
             key: 'userName',
         },
         {
-            title: 'Sản phẩm',
-            dataIndex: 'productName',
-            key: 'productName',
-        },
-        {
-            title: 'Số lượng',
-            dataIndex: 'quantity',
-            key: 'quantity',
-        },
-        {
-            title: 'Đơn giá',
-            dataIndex: 'unitPrice',
-            key: 'unitPrice',
+            title: 'Ngày đặt hàng',
+            dataIndex: 'orderDate',
+            key: 'orderDate',
         },
         {
             title: 'Tổng đơn',
@@ -62,57 +78,59 @@ const OrderTable = (props) => {
             title: 'Trạng thái',
             dataIndex: 'status',
             key: 'status',
+            render: (text, record) => (
+                <Select
+                    value={record.status}
+                    onChange={(value) => handleStatusChange(value, record)}
+                    style={{ width: 180 }}
+                >
+                    {statusOptions.map(status => (
+                        <Select.Option key={status} value={status}>
+                            {status}
+                        </Select.Option>
+                    ))}
+                </Select>
+            )
         },
         {
-            title: 'Action',
+            title: 'Thao tác',
             key: 'action',
             render: (_, record) => (
-                <Space size="middle">
-                    <Popconfirm
-                        title="Xóa đơn order"
-                        description="Bạn có chắc chắn muốn xóa đơn order này không?"
-                        onConfirm={() => handleDeleteOrder(record.orderId)}
-                        okText="Yes"
-                        cancelText="No"
-                        placement='left'
-                    >
-                        <Button type="primary" danger ghost><DeleteOutlined /></Button>
-                    </Popconfirm>
-                </Space>
+                <Popconfirm
+                    title="Xóa đơn order"
+                    description="Bạn có chắc chắn muốn xóa đơn hàng này không?"
+                    onConfirm={() => handleDeleteOrder(record.id)}
+                    okText="Yes"
+                    cancelText="No"
+                    placement='left'
+                >
+                    <Button type="primary" danger ghost><DeleteOutlined /></Button>
+                </Popconfirm>
             ),
         },
     ];
 
-    const handleDeleteOrder = async (id) => {
-        const res = await deleteCombinedOrders(id);
-        console.log(">>>>", res.data)
-        if (res.data) {
-            api["success"]({
-                message: 'Delete order',
-                description:
-                    'Xóa order thành công',
-            });
-            // dùng await vì bên kia loadUser dùng asyn
-            await loadOrder();
-        } else {
-            api["error"]({
-                message: "Error delete order",
-                description: JSON.stringify(res.message)
-            });
-        }
-    }
     return (
         <>
-
-            <Table rowKey={"id"} columns={columns} dataSource={flattenDataOrder} pagination={{
-                defaultPageSize: 10,
-                showSizeChanger: true,
-                pageSizeOptions: ['10', '20', '50'],
-                showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} đơn đặt hàng`, // hiển thị tổng số
-            }} />
-            <GetDetailOrder dataDetail={dataDetail} setDataDetail={setDataDetail} isDetailOpen={isDetailOpen} setIsDetailOpen={setIsDetailOpen} />
+            <Table
+                rowKey={"id"}
+                columns={columns}
+                dataSource={dataOrder}
+                pagination={{
+                    defaultPageSize: 10,
+                    showSizeChanger: true,
+                    pageSizeOptions: ['10', '20', '50'],
+                    showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} đơn đặt hàng`,
+                }}
+            />
+            <GetDetailOrder
+                dataDetail={dataDetail}
+                setDataDetail={setDataDetail}
+                isDetailOpen={isDetailOpen}
+                setIsDetailOpen={setIsDetailOpen}
+            />
         </>
     );
-}
+};
 
-export default OrderTable
+export default OrderTable;

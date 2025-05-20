@@ -23,6 +23,7 @@ import EditPersonal from './Components/Client/pages/EditPersonal.jsx'
 import Orders from './Components/Client/pages/Orders.jsx'
 import CartItemClient from './Components/Client/pages/CartItem.jsx'
 import ProductDetails from './Components/Client/pages/ProductDetails.jsx'
+import AuthRedirect from './AuthRedirect.jsx'
 const router = createBrowserRouter([
   {
     path: '/client',
@@ -112,11 +113,19 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginClient />
+    element: (
+      <AuthRedirect>
+        <LoginClient />
+      </AuthRedirect>
+    )
   },
   {
     path: '/',
-    element: <LoginClient />
+    element: (
+      <AuthRedirect>
+        <LoginClient />
+      </AuthRedirect>
+    )
   },
   {
     path: '*',

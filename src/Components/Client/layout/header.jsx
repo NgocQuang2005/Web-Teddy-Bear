@@ -75,53 +75,67 @@ function Header() {
         }
     };
     return (
-        <header className="container p-1">
-            <label className="phone" htmlFor="menu-mobile__show">
-                <ion-icon className="menu-phone" name="menu-outline"></ion-icon>
-            </label>
-            <div className="logo">
-                <NavLink to={"/client/home"}>
-                    <img className='logo-icon' src={logo} alt="Logo" />
-                </NavLink>
-            </div>
-            <ul className="menu-destop">
-                <li className="menu-item"><NavLink to={"/client/home"}>Trang chủ</NavLink></li>
-                <li className="menu-item"><NavLink to={"/client/products"}>Sản phẩm</NavLink></li>
-                <li className="menu-item"><NavLink to={"/client/blindbox"}>Blindbox</NavLink></li>
-                <li className="menu-item"><NavLink to={"/client/contact"}>Liên hệ</NavLink></li>
-            </ul>
-            <form onSubmit={handleSearch} className="search-form">
-                <button type="submit" className="search-btn">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
-                <input
-                    type="text"
-                    className="search-input"
-                    placeholder="Tìm kiếm gấu bông..."
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                />
-            </form>
-            <div className="cart-setting">
-                {/* Hiển thị icon giỏ hàng kèm số lượng */}
-                <Badge count={cartCount} showZero size="small" offset={[-2, 5]}>
-                    <NavLink to={"/client/cartitems"}>
-                        <ion-icon name="cart-outline" style={{ fontSize: "24px" }}></ion-icon>
+        <>
+            <header className="container p-1">
+                <label className="phone" htmlFor="menu-mobile__show">
+                    <ion-icon className="menu-phone" name="menu-outline"></ion-icon>
+                </label>
+                <div className="logo">
+                    <NavLink to={"/client/home"}>
+                        <img className='logo-icon' src={logo} alt="Logo" />
                     </NavLink>
-                </Badge>
+                </div>
+                <ul className="menu-destop">
+                    <li className="menu-item"><NavLink to={"/client/home"}>Trang chủ</NavLink></li>
+                    <li className="menu-item"><NavLink to={"/client/products"}>Sản phẩm</NavLink></li>
+                    <li className="menu-item"><NavLink to={"/client/blindbox"}>Blindbox</NavLink></li>
+                    <li className="menu-item"><NavLink to={"/client/contact"}>Liên hệ</NavLink></li>
+                </ul>
+                <form onSubmit={handleSearch} className="search-form">
+                    <button type="submit" className="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Tìm kiếm gấu bông..."
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                    />
+                </form>
+                <div className="cart-setting">
+                    {/* Hiển thị icon giỏ hàng kèm số lượng */}
+                    <Badge count={cartCount} showZero size="small" offset={[-2, 5]}>
+                        <NavLink to={"/client/cartitems"}>
+                            <ion-icon name="cart-outline" style={{ fontSize: "24px" }}></ion-icon>
+                        </NavLink>
+                    </Badge>
 
-                {/* Dropdown user */}
-                <Space direction="vertical">
-                    <Space wrap>
-                        <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                            <span style={{ cursor: "pointer" }}>
-                                <ion-icon name="person-circle-outline" style={{ fontSize: "24px" }}></ion-icon>
-                            </span>
-                        </Dropdown>
+                    {/* Dropdown user */}
+                    <Space direction="vertical">
+                        <Space wrap>
+                            <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                                <span style={{ cursor: "pointer" }}>
+                                    <ion-icon name="person-circle-outline" style={{ fontSize: "24px" }}></ion-icon>
+                                </span>
+                            </Dropdown>
+                        </Space>
                     </Space>
-                </Space>
+                </div>
+            </header>
+            <input type="checkbox" id="menu-mobile__show" />
+            <div class="menu-mobile">
+                <label for="menu-mobile__show" class="close-mobile">
+                    <ion-icon name="close-outline"></ion-icon>
+                </label>
+                <ul class="mobile-list">
+                    <li className="menu-list__item"><NavLink to={"/client/home"}>Trang chủ</NavLink></li>
+                    <li className="menu-list__item"><NavLink to={"/client/products"}>Sản phẩm</NavLink></li>
+                    <li className="menu-list__item"><NavLink to={"/client/blindbox"}>Blindbox</NavLink></li>
+                    <li className="menu-list__item"><NavLink to={"/client/contact"}>Liên hệ</NavLink></li>
+                </ul>
             </div>
-        </header>
+        </>
     );
 }
 
